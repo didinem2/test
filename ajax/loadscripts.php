@@ -1,7 +1,6 @@
 <?php
 
 /*
- * @version $Id: HEADER 15930 2011-10-30 15:47:55Z tsmr $
  -------------------------------------------------------------------------
  requester plugin for GLPI
  Copyright (C) 2013-2016 by the requester Development Team.
@@ -46,6 +45,12 @@ if (isset($_POST['action'])) {
             echo "requester.requester_injectNameRequester();";
             echo "</script>";
          }
+
+         break;
+         
+         case "loading" :
+
+         return "";
 
          break;
    }
