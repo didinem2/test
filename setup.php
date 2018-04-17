@@ -36,6 +36,7 @@ function plugin_init_requester() {
        Plugin::registerClass('PluginRequesterProfile', ['addtabon' => 'Profile']);
 
       $PLUGIN_HOOKS['add_javascript']['requester'] = ["scripts/requester.js"];
+      $PLUGIN_HOOKS['javascript']['requester'] = ["js/requester.js"];
 
       if (strpos($_SERVER['REQUEST_URI'], "ticket.form.php") !== false
          || strpos($_SERVER['REQUEST_URI'], "helpdesk.public.php") !== false
@@ -60,8 +61,6 @@ function plugin_init_requester() {
 
        $PLUGIN_HOOKS['item_add']['requester']        = ['Ticket' => ['PluginRequesterTicket', 'afterAdd']];
        $PLUGIN_HOOKS['item_update']['requester']     = ['Ticket' => ['PluginRequesterTicket', 'afterUpdate']];
-
-       $PLUGIN_HOOKS['item_empty']['requester']      = ['Ticket' => ['PluginRequesterTicket', 'emptyTicket']];
 
    }
    // Notifications
@@ -93,7 +92,7 @@ function plugin_version_requester() {
  */
 function plugin_requester_check_prerequisites() {
    if (version_compare(GLPI_VERSION, '9.3', 'lt') || version_compare(GLPI_VERSION, '9.4', 'ge')) {
-      _e('This plugin requires GLPI >= 9.3', 'requester');
+      echo __('This plugin requires GLPI >= 9.3', 'requester');
       return false;
    }
    return true;

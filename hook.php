@@ -36,12 +36,15 @@ function plugin_requester_install() {
    if (!TableExists("glpi_plugin_requester_configs")) {
 
       // table sql creation
-      $DB->runFile(GLPI_ROOT . "/plugins/requester/install/sql/empty.sql");
+      $DB->runFile(GLPI_ROOT . "/plugins/requester/install/sql/empty-1.0.1.sql");
 
       foreach ($DB->request("SELECT `id` FROM `glpi_profiles`") as $prof) {
          $rights = ['plugin_requester' => READ + UPDATE + CREATE + PURGE];
          PluginRequesterProfile::addDefaultProfileInfos($prof['id'], $rights, true);
       }
+   } else {
+   // table sql creation
+      $DB->runFile(GLPI_ROOT . "/plugins/requester/install/sql/update-1.0.1.sql");
    }
 
    PluginRequesterProfile::createFirstAccess($_SESSION['glpiactiveprofile']['id']);
