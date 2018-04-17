@@ -75,10 +75,8 @@ class PluginRequesterTicket extends CommonITILObject {
          }
       }
 
-      unset($_SESSION['glpi_plugin_requester_ticket']);
-
       echo "<tr class='tab_bg_1'><td>";
-      _e('Name of requester', 'requester');
+      echo __('Name of requester', 'requester');
       echo "<span class='red'>*</span>&nbsp;";
       echo "</td><td>";
       Html::autocompletionTextField($this, "requester_name");
@@ -123,7 +121,7 @@ class PluginRequesterTicket extends CommonITILObject {
       unset($_SESSION['glpi_plugin_requester_ticket']);
 
       echo "<tr class='tab_bg_1'><th width='13%'>";
-      _e('Name of requester', 'requester');
+      echo __('Name of requester', 'requester');
       echo "<span class='red'>*</span>&nbsp;";
       echo "</th><td id='requester_name'>";
       $options = ['option' => 'disabled="disabled"'];
@@ -301,6 +299,9 @@ class PluginRequesterTicket extends CommonITILObject {
             case 'requester_name':
                $_SESSION['glpi_plugin_requester_ticket'][$key] = $values;
                break;
+               case 'requester_user':
+               $_SESSION['glpi_plugin_requester_ticket'][$key] = $values;
+               break;
          }
 
       }
@@ -328,6 +329,8 @@ class PluginRequesterTicket extends CommonITILObject {
 
       $target->datas['##lang.ticket.requester##'] = __('Name of requester', 'requester');
       $target->datas['##ticket.requester##'] = "";
+      
+      $target->datas['##ticket.title##'] = "";
 
       if (isset($target->obj->fields['id']) && isset($target->obj->input['requester_name'])) {
          if ($plugin->isActivated('requester')) {
